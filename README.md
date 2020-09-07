@@ -59,3 +59,46 @@ A ‘chat’ functionality once a space has been booked, allowing users whose sp
 Be able to search available spaces by tags.
 Basic payment implementation though Stripe.
 ```
+
+## Database Setup
+
+1. Use homebrew to install mongodb
+   ```
+   brew tap mongodb/brew
+   brew install mongodb-community@4.4
+   brew services start mongodb-community@4.4
+   ```
+
+2. Connect to Mongo shell
+   ```
+   mongo
+   ```
+
+3. Create BanditBnB Database and switch into it
+   ```
+   use BanditBnB
+   ```
+
+4. Create collections for users and properties
+   ```
+   createCollection("users")
+   createCollection("properties")
+   ```
+
+## Test Database Setup
+
+1. Connect to Mongo shell
+  ```
+  mongo
+  ```
+
+2. Create Test BanditBnB Database and switch into it
+  ```
+  use BanditBnB_test
+  ```
+
+3. Create collections for users and properties
+  ```
+  createCollection("users")
+  createCollection("properties")
+  ```

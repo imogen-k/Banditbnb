@@ -6,19 +6,46 @@ We would like a web application that allows users to list spaces they have avail
 
 Headline specifications
 ```
-Any signed-up user can list a new space.
-Users can list multiple spaces.
-Users should be able to name their space, provide a short description of the space, and a price per night.
-Users should be able to offer a range of dates where their space is available.
-Any signed-up user can request to hire any space for one night, and this should be approved by the user that owns that space.
-Nights for which a space has already been booked should not be available for users to book that space.
-Until a user has confirmed a booking request, that space can still be booked for that night.
+As a User
+I would like to be able to sign up for an account.
+
+As a User
+I would like to be able to sign into my account.
+
+As a non-signed-in User
+I would like to be able to see available spaces.
+
+As a signed-in User
+I want to be able to list a space.
+
+As a User 
+I want to be able to list multiple spaces.
+
+As a User 
+I want to be able to add details to my space(name, description, ppn).
+
+As a User
+I want to be able to select a range of dates where my space is available.
+
+As a signed-up User
+I want to be able to reserve a space for one night. 
+
+As a User
+I want to be able to approve or deny reservations for my spaces.
+
+As a User
+I dont want to be able to book spaces that are not available.
+
+As a User
+I want to be able to book spaces that have unconfirmed reservations.
+
 Nice-to-haves
 
 Users should receive an email whenever one of the following happens:
 They sign up
 They create a space
 They update a space
+Able to save a list of favourites
 A user requests to book their space
 They confirm a request
 They request to book a space
@@ -29,5 +56,6 @@ A user requests to book their space
 Their request to book a space is confirmed
 Their request to book a space is denied
 A ‘chat’ functionality once a space has been booked, allowing users whose space-booking request has been confirmed to chat with the user that owns that space
+Be able to search available spaces by tags.
 Basic payment implementation though Stripe.
 ```

@@ -1,26 +1,26 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose'); 
+var PropertySchema = require('./propertySchema.js');
 
-const propertySchema = new mongoose.Schema({
-name: String,
-address: String,
-description: String,
-ppn: Number,
-contact: String,
-availability: Boolean
-})
+class Property {
+  constructor(name, address, description, ppm, contact, availability) {
+    this.name = name
+    this.address = address 
+    this.description = description
+    this.ppm = ppm 
+    this.contact = contact 
+    this.availability = availability
+  }
 
-const Property = mongoose.model('Property', propertySchema);
+  new() {
+    new Property(name, address, description, ppm, contact, availability)
+  }
 
-module.exports = Property
-// const villa = new Property({
-//   name: 'Villa', address: '124 cool kids lane', description: 'Cool villa for cool kids', 
-// ppn: 234.55, contact: 'coolkidz@cool.com', availability: true });
-//   console.log(villa.name);
+  all() {
+    mongoose.connect('mongodb+srv://fraser:Zhe3ren3@banditbnb.1nsfl.mongodb.net/BanditBnB?retryWrites=true&w=majority', {useNewUrlParser: true});
+    const db = mongoose.connection;
+     var all = PropertySchema.find({},function(err,docs){
+      });
+  
 
-//   villa.save(function (err, villa) {
-//     if (err) return console.error(err);
-//     console.log(villa.name);
-//   });
-
-//   export { Property };
-
+  }
+}

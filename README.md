@@ -81,8 +81,8 @@ Basic payment implementation though Stripe.
 
 4. Create collections for users and properties
    ```
-   createCollection("users")
-   createCollection("properties")
+   db.createCollection("users")
+   db.createCollection("properties")
    ```
 
 ## Test Database Setup
@@ -99,6 +99,6 @@ Basic payment implementation though Stripe.
 
 3. Create collections for users and properties
   ```
-  createCollection("users")
-  createCollection("properties")
+  db.createCollection("users")
+  db.createCollection("properties")
   ```

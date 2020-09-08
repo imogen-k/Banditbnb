@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+app.set('view engine', 'ejs');
 var port = 3000
 var path = require('path')
 var PropertySchema = require('./propertySchema.js');
@@ -14,11 +15,12 @@ db.once('open', function() {
 
 
 app.get('/', function (req, res) {
+  var a=32
   app.use(express.static(__dirname + '/images'));
-  res.sendFile(path.join(__dirname + '/routes/landingPage.html'))
-  
-  
+  res.render('landingPage', { a:a})
+
+
+
 });
 
 app.listen(port);
-

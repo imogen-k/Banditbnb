@@ -1,28 +1,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-
-        <title> Search engine bandits</title
-
+      <link rel="stylesheet" type="text/css" href="/css/stylesheet.css" media="screen"/>
+      <title> Search engine bandits</title>
 
     </head>
     <body>
-
-    <!-- <h1>Search engine bandits</h1>
-    <p><%= all.forEach(function(property){
-        return property.name
-    }) %></p> -->
-
-
-    <% all.forEach(function(property) { %>
-        <li><%= property.name %> - <%= property.description %></li>
-    <% }); %>
-
-
-    <button type="submit"> Log in </button>
-    <button type="submit"> Sign up </button>
-
-    <img src="logo.png" alt="bandit">
-
+      <img src="logo.png" alt="bandit">
+   <section id='button'>
+      <button class="button" type="submit"> Log in </button>
+      <button class="button" type="submit"> Sign up </button>
+    </section> 
+   
+      <% all.forEach(function(property) { %>
+        <div class="content">
+        <h3><%= property.name %></h3><br><%= property.description %><br><%=property.address%><br>£<%= property.ppn%><br><%=property.contact%><br>
+      <button class=" button1" type="submit">Book now!</button><br></div><% }); %>
+    
     </body>
 </html>

@@ -8,8 +8,16 @@
     </head>
     <body>
 
-    <h1>Search engine bandits</h1>
-    <p><%= a %></p>
+    <!-- <h1>Search engine bandits</h1>
+    <p><%= all.forEach(function(property){
+        return property.name
+    }) %></p> -->
+
+
+    <% all.forEach(function(property) { %>
+        <li><%= property.name %> - <%= property.description %></li>
+    <% }); %>
+
 
     <button type="submit"> Log in </button>
     <button type="submit"> Sign up </button>

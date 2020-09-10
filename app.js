@@ -3,12 +3,17 @@
 var path = require('path');
 
 var express = require('express');
+var bodyParser = require('body-parser')
+var jsonParser = bodyParser.json()
 var app = express();
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.set('view engine', 'ejs');
 var port = 3000
 
 var PropertySchema = require('./lib/propertySchema.js');
 var Property = require('./lib/property.js')
+const User = require('./lib/userSchema.js')
 
 
 const mongoose = require('mongoose');
@@ -29,18 +34,18 @@ app.get('/', function (req, res) {
     app.use(express.static(__dirname + '/views'));
     res.render('landingPage', { all: all });
   }
+const all = Property.all(renderLandingPage)
 });
-  const all = Property.all(renderLandingPage)
 
-  app.get('/register', function (req, res) {
-    res.render('register');
-  })
+app.get('/register', function (req, res) {
+  res.render('register');
+})
 
-  app.post('/register', function (req, res) {
-    const {name,email, password, password2} = req.body;
-    let errors = [];
-    console.log(' Name: ' + name+ ' email :' + email+ ' pass:' + password);
-    if(!name || !email || !password || !password2) {
+app.post('/register', function (req, res) {
+  const {name,email, password, password2} = req.body;
+  let errors = [];
+  console.log(' Name: ' + name+ ' email :' + email+ ' pass:' + password);
+  if(!name || !email || !password || !password2) {
         errors.push({msg : "Please fill in all fields"})
     }
     //check if match
@@ -74,6 +79,7 @@ app.get('/', function (req, res) {
                 password : password
             });
           };
+      });
   };
 });
 

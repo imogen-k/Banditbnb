@@ -6,7 +6,9 @@ address: String,
 description: String,
 ppn: Number,
 contact: String,
-availability: Boolean
+availability: Boolean,
+date_available_from: String,
+date_available_to: String
 })
 
 const PropertySchema = mongoose.model('properties', propertySchema);

@@ -1,8 +1,10 @@
+var path = require('path');
+
 var express = require('express');
 var app = express();
 app.set('view engine', 'ejs');
 var port = 3000
-var path = require('path')
+
 var PropertySchema = require('./propertySchema.js');
 
 const mongoose = require('mongoose');

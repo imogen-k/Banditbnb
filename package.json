@@ -1432,7 +1432,6 @@
   },
   "devDependencies": {
     "jasmine": "^3.6.1",
-    "jest": "^26.4.2",
-    "mongodb-memory-server": "^6.7.2"
+    "jest": "^26.4.2"
   }
 }

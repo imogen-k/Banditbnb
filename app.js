@@ -4,6 +4,7 @@ var path = require('path');
 
 var express = require('express');
 var bodyParser = require('body-parser')
+var bcrypt = require('bcrypt');
 var jsonParser = bodyParser.json()
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -42,20 +43,20 @@ app.get('/register', function (req, res) {
 })
 
 app.post('/register', function (req, res) {
-  const {name,email, password, password2} = req.body;
+  const {name, email, password, password2} = req.body;
   let errors = [];
   console.log(' Name: ' + name+ ' email :' + email+ ' pass:' + password);
   if(!name || !email || !password || !password2) {
-        errors.push({msg : "Please fill in all fields"})
+        errors.push({msg : "Please fill in all of the fields."})
     }
     //check if match
     if(password !== password2) {
-        errors.push({msg : "passwords dont match"});
+        errors.push({msg : "Passwords don't match."});
     }
 
     //check if password is more than 6 characters
     if(password.length < 6 ) {
-        errors.push({msg : 'password atleast 6 characters'})
+        errors.push({msg : 'Password must be at least 6 characters.'})
     }
     if(errors.length > 0 ) {
     res.render('register', {
@@ -69,7 +70,7 @@ app.post('/register', function (req, res) {
       User.findOne({email : email}).exec((err,user)=>{
         console.log(user);   
         if(user) {
-            errors.push({msg: 'email already registered'});
+            errors.push({msg: 'Email already associated with an account.'});
             render(res,errors,name,email,password,password2);
             
           } else {
@@ -78,8 +79,23 @@ app.post('/register', function (req, res) {
                 email : email,
                 password : password
             });
-          };
-      });
+          bcrypt.genSalt(10,(err,salt)=> 
+            bcrypt.hash(newUser.password,salt,
+                (err,hash)=> {
+                    if(err) throw err;
+                    //save pass to hash
+                    newUser.password = hash;
+                    //save user
+                    newUser.save()
+                    .then((value)=>{
+                        console.log(value)
+                    res.redirect('/users/login');
+                    })
+                    .catch(value=> console.log(value));
+                      
+                }));
+             } //ELSE statement ends here
+          });
   };
 });
 

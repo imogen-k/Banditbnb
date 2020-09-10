@@ -1440,5 +1440,9 @@
       "resolved": "https://registry.npmjs.org/xdg-basedir/-/xdg-basedir-4.0.0.tgz",
       "version": "4.0.0"
     }
+  },
+  "devDependencies": {
+    "jest": "^26.4.2",
+    "mongodb-memory-server": "^6.7.2"
   }
 }

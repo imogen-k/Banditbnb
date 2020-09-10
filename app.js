@@ -7,8 +7,8 @@ var app = express();
 app.set('view engine', 'ejs');
 var port = 3000
 
-var PropertySchema = require('./propertySchema.js');
-var Property = require('./property.js')
+var PropertySchema = require('./lib/propertySchema.js');
+var Property = require('./lib/property.js')
 
 
 const mongoose = require('mongoose');

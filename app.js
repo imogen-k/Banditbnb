@@ -1,3 +1,5 @@
+"use strict";
+
 var path = require('path');
 
 var express = require('express');
@@ -6,6 +8,8 @@ app.set('view engine', 'ejs');
 var port = 3000
 
 var PropertySchema = require('./propertySchema.js');
+var Property = require('./property.js')
+
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://fraser:Zhe3ren3@banditbnb.1nsfl.mongodb.net/BanditBnB?retryWrites=true&w=majority', {useNewUrlParser: true});
@@ -16,10 +20,15 @@ db.once('open', function() {
 })
 
 
+
 app.get('/', function (req, res) {
-  var a=32
-  app.use(express.static(__dirname + '/images'));
-  res.render('landingPage', { a:a})
+  function renderLandingPage(all) {
+    console.log(all);
+    app.use(express.static(__dirname + '/images'));
+    app.use(express.static(__dirname + '/views'));
+    res.render('landingPage', { all: all });
+  }
+  const all = Property.all(renderLandingPage)
 
 
 

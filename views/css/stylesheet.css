@@ -14,7 +14,7 @@ body {
 }
 
 .content { 
-  text-align: left;
+  align: left;
   background-color: rgb(255, 255, 255);
   width: 80%;
   border: 2px  Solid #ad4d35;

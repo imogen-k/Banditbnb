@@ -5,8 +5,28 @@ var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser')
 var bcrypt = require('bcrypt');
+const session = require('express-session')
+const flash = require('connect-flash')
+const passport = require('passport');
 var app = express();
+require("./config/passport")(passport)
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(session({
+  secret: 'secret',
+  resave: true,
+  saveUnintialized : true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+app.use((req,res,next)=> {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
+})
+
+
 app.use(bodyParser.json())
 app.set('view engine', 'ejs');
 var port = 3000
@@ -27,11 +47,12 @@ db.once('open', function() {
 
 
 app.get('/', function (req, res) {
-  function renderLandingPage(all) {
+  function renderLandingPage(all,) {
     console.log(all);
     app.use(express.static(__dirname + '/images'));
     app.use(express.static(__dirname + '/views'));
-    res.render('landingPage', { all: all });
+    res.render('landingPage', { all: all, user: req.user });
+
   }
 const all = Property.all(renderLandingPage)
 });
@@ -69,7 +90,7 @@ app.post('/register', function (req, res) {
         console.log(user);   
         if(user) {
             errors.push({msg: 'Email already associated with an account.'});
-            render(res,errors,name,email,password,password2);
+            res.render('register',{errors,name,email,password,password2})
             
           } else {
             const newUser = new User({
@@ -87,7 +108,8 @@ app.post('/register', function (req, res) {
                     newUser.save()
                     .then((value)=>{
                         console.log(value)
-                    res.redirect('/users/login');
+                        req.flash('success_msg','Registration complete!')
+                    res.redirect('/login');
                     })
                     .catch(value=> console.log(value));
                       
@@ -102,7 +124,11 @@ app.post('/register', function (req, res) {
   })
 
   app.post('/login', function (req, res, next) {
-    
+    passport.authenticate('local', {
+      successRedirect : '/dashboard',
+      failureRedirect : '/users/login',
+      failureFlash : true,
+    })(req,res,next);
   })
 
   app.get('/register-property', function (req, res) {

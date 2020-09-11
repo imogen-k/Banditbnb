@@ -5,7 +5,6 @@ var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser')
 var bcrypt = require('bcrypt');
-var jsonParser = bodyParser.json()
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -18,7 +17,6 @@ const User = require('./lib/userSchema.js')
 
 
 const mongoose = require('mongoose');
-const { Router } = require('express');
 mongoose.connect('mongodb+srv://fraser:Zhe3ren3@banditbnb.1nsfl.mongodb.net/BanditBnB?retryWrites=true&w=majority', {useNewUrlParser: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

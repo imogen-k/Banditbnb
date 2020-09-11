@@ -1,5 +1,5 @@
 'use strict';
-const User = require('./lib/userSchema.js');
+const User = require('../lib/userSchema.js');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 

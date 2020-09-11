@@ -125,8 +125,8 @@ app.post('/register', function (req, res) {
 
   app.post('/login', function (req, res, next) {
     passport.authenticate('local', {
-      successRedirect : '/dashboard',
-      failureRedirect : '/users/login',
+      successRedirect : '/landingPage',
+      failureRedirect : '/login',
       failureFlash : true,
     })(req,res,next);
   })

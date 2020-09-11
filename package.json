@@ -2,7 +2,7 @@
   "requires": true,
   "lockfileVersion": 1,
   "scripts": {
-    "start": "node app.js"
+    "start": "nodemon -e js,ejs,css app.js"
   },
   "dependencies": {
     "@sindresorhus/is": {
@@ -1082,6 +1082,7 @@
       "resolved": "https://registry.npmjs.org/saslprep/-/saslprep-1.0.3.tgz",
       "version": "1.0.3"
     },
+    "save": "^2.4.0",
     "semver": {
       "integrity": "sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==",
       "resolved": "https://registry.npmjs.org/semver/-/semver-5.7.1.tgz",

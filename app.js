@@ -31,8 +31,8 @@ app.use(bodyParser.json())
 app.set('view engine', 'ejs');
 var port = 3000
 
-var PropertySchema = require('./lib/propertySchema.js');
-var Property = require('./lib/property.js')
+
+var Property = require('./lib/propertySchema.js')
 const User = require('./lib/userSchema.js')
 
 
@@ -47,14 +47,13 @@ db.once('open', function() {
 
 
 app.get('/', function (req, res) {
-  function renderLandingPage(all,) {
-    console.log(all);
+  Property.find({}, function (err, properties) {
+    
     app.use(express.static(__dirname + '/images'));
     app.use(express.static(__dirname + '/views'));
-    res.render('landingPage', { all: all, user: req.user });
+    res.render('landingPage', { properties: properties, user: req.user });
 
-  }
-const all = Property.all(renderLandingPage)
+  });
 });
 
 app.get('/register', function (req, res) {
@@ -125,7 +124,7 @@ app.post('/register', function (req, res) {
 
   app.post('/login', function (req, res, next) {
     passport.authenticate('local', {
-      successRedirect : '/landingPage',
+      successRedirect : '/',
       failureRedirect : '/login',
       failureFlash : true,
     })(req,res,next);
@@ -138,7 +137,7 @@ app.post('/register', function (req, res) {
   app.post('/register-property', function (req, res) {
     const { name, address, description, ppn, contact, start_date, end_date } = req.body;
 
-    const newProperty = new PropertySchema({
+    const newProperty = new Property({
       name: name,
       address: address,
       description: description,

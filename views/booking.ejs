@@ -14,6 +14,7 @@ div {
 <body>
 <h1 style='margin-top: 50;'><%= property.name %></h1>
 <br>
+<%- include ('./partials/messages') %>
 <b>Address:</b> <br>
 <%= property.address %>
 <br><br>
@@ -34,20 +35,20 @@ div {
 <br><br>
 <div>
 <h3>Please select the dates you want to book for:</h3>
-<form action="/booking/<%= property.id %>" method="post"></form>
+<form action="/booking/<%= property.id %>" method="post">
 <label for="start_date">Start Date:</label>
-  <input type="date" name="start_date" placeholder="Start date">
+  <input type="date" name="user_start_date" placeholder="Start date">
 <br>
 <br>
 <label for="end_date">End Date:</label>
-  <input type="date" name="end_date" placeholder="End date">
+  <input type="date" name="user_end_date" placeholder="End date">
 <br>
   <input type="submit" value="Check Availability" style="margin-top: 20;">
 </form>
 <br>
 
 <!-- if available show this button -->
-<form action="/booking/<%= property.id %>/confirmation" method="post"></form>
+<form action="/booking/confirmation" method="post">
   <input type="submit" value="Book now!" style="margin-top: 50;">
 </form>
 </div>

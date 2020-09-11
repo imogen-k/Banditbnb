@@ -9,15 +9,23 @@
       <img src="logo.png" alt="bandit">
    <section id='button'>
     <% if(user) { %>
-      <button class="button" type="submit"> Log out </button>
-      <button class="button" type="submit"> Register Property </button>
+      <form action="/logout">
+        <button class="button" type="submit"> Log out </button>
+      </form>
+      <form action="/register-property">
+        <button class="button" type="submit"> Register Property </button>
+      </form>
     <% } else { %> 
-      <button class="button" type="submit"> Log in </button>
-      <button class="button" type="submit"> Sign up </button>
+      <form action="/login">
+        <button class="button" type="submit"> Log in </button>
+      </form>
+      <form action="/register">
+        <button class="button" type="submit"> Sign up </button>
+      </form>
     <% } %>
     </section> 
     <% if(user) { %>
-      <p> Welcome <%= user.name %></p>
+      <p> Welcome <%= user.name %>!!!</p>
     <% } %>
       <% properties.forEach(function(property) { %>
         <div class="content">

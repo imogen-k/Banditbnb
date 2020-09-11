@@ -77,7 +77,7 @@ app.post('/register', function (req, res) {
         errors.push({msg : 'Password must be at least 6 characters.'})
     }
     if(errors.length > 0 ) {
-    res.render('register', {
+    res.render('register-property', {
         errors : errors,
         name : name,
         email : email,
@@ -136,21 +136,38 @@ app.post('/register', function (req, res) {
 
   app.post('/register-property', function (req, res) {
     const { name, address, description, ppn, contact, start_date, end_date } = req.body;
+    let errors = [];
+    if(!name || !address || !description || !ppn || !contact || !start_date || !end_date) {
+        errors.push({msg : "Please fill in all of the fields."})
+    }
+    if (errors.length > 0) {
+      res.render('register-property', {
+        errors: errors,
+        name: name,
+        address: address,
+        description: description,
+        ppn: ppn,
+        contact: contact,
+        start_date: start_date,
+        end_date: end_date
+      })
+    } else {
 
-    const newProperty = new Property({
-      name: name,
-      address: address,
-      description: description,
-      ppn: ppn,
-      contact: contact,
-      start_date: start_date,
-      end_date: end_date
-    });
+      const newProperty = new Property({
+        name: name,
+        address: address,
+        description: description,
+        ppn: ppn,
+        contact: contact,
+        start_date: start_date,
+        end_date: end_date
+      });
 
-    newProperty.save().then((value) => {
-      console.log(value);
-      res.redirect('/');
-    });
+      newProperty.save().then((value) => {
+        console.log(value);
+        res.redirect('/');
+      });
+    }
   })
 
   app.get('/logout', function (req, res) {

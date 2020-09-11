@@ -8,8 +8,13 @@
     <body>
       <img src="logo.png" alt="bandit">
    <section id='button'>
+    <% if(user) { %>
+      <button class="button" type="submit"> Log out </button>
+      <button class="button" type="submit"> Register Property </button>
+    <% } else { %> 
       <button class="button" type="submit"> Log in </button>
       <button class="button" type="submit"> Sign up </button>
+    <% } %>
     </section> 
     <% if(user) { %>
       <p> Welcome <%= user.name %></p>

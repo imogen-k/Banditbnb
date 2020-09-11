@@ -154,10 +154,10 @@ app.post('/register', function (req, res) {
   })
 
   app.get('/logout', function (req, res) {
-    
+    req.logout()
+    req.flash('success_msg',"You've been logged out")
+    res.redirect('/')
   })
-
-
 
 
 app.listen(port);

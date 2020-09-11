@@ -105,6 +105,29 @@ app.post('/register', function (req, res) {
     
   })
 
+  app.get('/register-property', function (req, res) {
+    res.render('register-property');
+  })
+
+  app.post('/register-property', function (req, res) {
+    const { name, address, description, ppn, contact, start_date, end_date } = req.body;
+
+    const newProperty = new PropertySchema({
+      name: name,
+      address: address,
+      description: description,
+      ppn: ppn,
+      contact: contact,
+      start_date: start_date,
+      end_date: end_date
+    });
+
+    newProperty.save().then((value) => {
+      console.log(value);
+      res.redirect('/');
+    });
+  })
+
   app.get('/logout', function (req, res) {
     
   })

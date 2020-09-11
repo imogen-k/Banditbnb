@@ -1,0 +1,72 @@
+<h1>Register New Property</h1>
+<%- include ('./partials/messages') %>
+<form action="/register-property" method="POST">
+<div>
+    <label for="name">Property Name</label>
+    <input
+      type="name"
+      name="name"
+      placeholder="Enter Name"
+      value="<%= typeof name != 'undefined' ? name : '' %>"
+    />
+  
+</div>
+<div>
+    <label for="address">Address</label>
+    <input
+      type="text"
+      name="address"
+      placeholder="Enter Address"
+      value="<%= typeof address != 'undefined' ? address : '' %>"
+    />
+  </div>
+  <div >
+    <label for="description">Description</label>
+    <input
+      type="text"
+      name="description"
+      placeholder="Enter Description"
+      value="<%= typeof description != 'undefined' ? description : '' %>"
+    />
+  </div>
+  <div >
+    <label for="ppn">Price Per Night</label>
+    <input
+      type="number"
+      name="ppn"
+      placeholder="Enter Price Per Night"
+      value="<%= typeof ppn != 'undefined' ? ppn : '' %>"
+    />
+  </div>
+  <div >
+    <label for="contact">Contact email</label>
+    <input
+      type="email"
+      name="contact"
+      placeholder="Enter Email"
+      value="<%= typeof contact != 'undefined' ? contact : '' %>"
+    />
+  </div>
+  <div >
+    <label for="start_date">Start Date</label>
+    <input
+      type="date"
+      name="start_date"
+      placeholder="Enter Start Date"
+      value="<%= typeof start_date != 'undefined' ? start_date : '' %>"
+    />
+  </div>
+  <div >
+    <label for="end_date">End Date</label>
+    <input
+      type="date"
+      name="end_date"
+      placeholder="Enter End Date"
+      value="<%= typeof end_date != 'undefined' ? end_date : '' %>"
+    />
+  </div>
+  
+  <button type="submit" class="btn btn-primary btn-block">
+    Register
+  </button>
+</form>

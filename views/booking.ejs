@@ -1,0 +1,56 @@
+
+<style>
+body {
+    text-align: center;
+}
+
+div {
+    display: inline-block; 
+    text-align: left;
+}
+</style>
+
+
+<body>
+<h1 style='margin-top: 50;'><%= property.name %></h1>
+<br>
+<%- include ('./partials/messages') %>
+<b>Address:</b> <br>
+<%= property.address %>
+<br><br>
+<b>Price per night: </b><br>
+£<%= property.ppn %> per night
+<br><br>
+<b>Property description:</b> <br>
+<%= property.description %>
+<br><br>
+<b>Host contact info:</b> <br>
+<%= property.contact %>
+<br><br>
+<b>Date available from: </b><br>
+<%= property.start_date %>
+<br><br>
+<b> Date available until:</b> <br>
+<%= property.end_date %>
+<br><br>
+<div>
+<h3>Please select the dates you want to book for:</h3>
+<form action="/booking/<%= property.id %>" method="post">
+<label for="start_date">Start Date:</label>
+  <input type="date" name="user_start_date" placeholder="Start date">
+<br>
+<br>
+<label for="end_date">End Date:</label>
+  <input type="date" name="user_end_date" placeholder="End date">
+<br>
+  <input type="submit" value="Check Availability" style="margin-top: 20;">
+</form>
+<br>
+
+<!-- if available show this button -->
+<form action="/booking/confirmation" method="post">
+  <input type="submit" value="Book now!" style="margin-top: 50;">
+</form>
+</div>
+
+</body>

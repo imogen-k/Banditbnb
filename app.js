@@ -56,6 +56,51 @@ app.get('/', function (req, res) {
   });
 });
 
+app.get('/booking/:id', function(req, res) {
+  PropertySchema.findById(req.params.id, function(err, property){
+    res.render('booking.ejs', {
+      property : property
+    });
+ });
+  
+})
+
+app.post('/booking/:id', function(req, res) {
+  
+const { user_start_date, user_end_date } = req.body;
+PropertySchema.findById(req.params.id, function(err, property) {
+  
+  let errors = []
+    if((user_start_date >= property.start_date)&&(user_end_date <= property.end_date)) {
+      
+      res.render('booking', {
+        user_start_date : user_start_date,
+        user_end_date : user_end_date,
+        property : property
+
+      })
+      req.flash('success_msg', 'Property available to book for your dates!')
+      
+    } else {
+      errors.push({msg: 'This property is not available for these dates'});
+      res.render('booking', {
+        user_start_date : user_start_date,
+        user_end_date : user_end_date,
+        property : property,
+        errors : errors
+      })
+  }
+})
+
+})
+
+
+
+app.get('/booking/confirmation', function(req, res) {
+  res.render('bookingConfirmation.ejs')
+})
+
+
 app.get('/register', function (req, res) {
   res.render('register');
 })

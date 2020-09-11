@@ -36,6 +36,21 @@ app.get('/', function (req, res) {
 const all = Property.all(renderLandingPage)
 });
 
+app.get('/booking/:id', function(req, res) {
+  var id = req.params.id
+  console.log("here i am")
+  console.log(id)
+  PropertySchema.findById(req.params.id, function(err, property){
+    console.log("property.....")
+    console.log(property.name)
+    res.render('booking.ejs', {
+      property : property
+    });
+ });
+  
+})
+
+
 app.get('/register', function (req, res) {
   res.render('register');
 })

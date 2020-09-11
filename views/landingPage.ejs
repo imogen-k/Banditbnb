@@ -8,21 +8,23 @@
     <body>
       <img src="logo.png" alt="bandit">
    <section id='button'>
+     <div class ="btn-container">
     <% if(user) { %>
       <form action="/logout">
-        <button class="button" type="submit"> Log out </button>
+        <button class="button2" type="submit"> Log out </button>
       </form>
       <form action="/register-property">
-        <button class="button" type="submit"> Register Property </button>
+        <button class="button3" type="submit"> Register Property </button>
       </form>
     <% } else { %> 
       <form action="/login">
-        <button class="button" type="submit"> Log in </button>
+        <button class="button2" type="submit"> Log in </button>
       </form>
       <form action="/register">
-        <button class="button" type="submit"> Sign up </button>
+        <button class="button3" type="submit"> Sign up </button>
       </form>
     <% } %>
+  </div>
     </section> 
     <% if(user) { %>
       <p> Welcome <%= user.name %>!!!!</p>
@@ -36,9 +38,12 @@
           </form>
         <% } else { %>
           <form action="/login" method="get">
-            <button class=" button1" type="submit">Book now!</button><br></div>
+            <button class=" button1" type="submit">Book now!</button>
           </form>
+          <br>
+        </div>
         <% } %>
+        <br>
       <% }); %>
     
     </body>

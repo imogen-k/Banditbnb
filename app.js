@@ -53,6 +53,8 @@ app.get('/', function (req, res) {
 });
 
 app.get('/booking/:id', function (req, res) {
+  app.use(express.static(__dirname + '/images'));
+  app.use(express.static(__dirname + '/views'));
   Property.findById(req.params.id, function (err, property) {
     res.render('booking.ejs', {
       property: property,
@@ -91,10 +93,14 @@ app.get('/booking/confirmation', function (req, res) {
 });
 
 app.get('/register', function (req, res) {
+  app.use(express.static(__dirname + '/images'));
+  app.use(express.static(__dirname + '/views'));
   res.render('register');
 });
 
 app.post('/register', function (req, res) {
+  app.use(express.static(__dirname + '/images'));
+  app.use(express.static(__dirname + '/views'));
   const { name, email, password, password2 } = req.body;
   let errors = [];
   console.log(' Name: ' + name + ' email :' + email + ' pass:' + password);
@@ -153,6 +159,8 @@ app.post('/register', function (req, res) {
 });
 
 app.get('/login', function (req, res) {
+  app.use(express.static(__dirname + '/images'));
+  app.use(express.static(__dirname + '/views'));
   res.render('login');
 });
 
@@ -165,6 +173,8 @@ app.post('/login', function (req, res, next) {
 });
 
 app.get('/register-property', function (req, res) {
+  app.use(express.static(__dirname + '/images'));
+  app.use(express.static(__dirname + '/views'));
   res.render('register-property');
 });
 

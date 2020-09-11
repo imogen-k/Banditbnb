@@ -5,14 +5,34 @@ var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser')
 var bcrypt = require('bcrypt');
+const session = require('express-session')
+const flash = require('connect-flash')
+const passport = require('passport');
 var app = express();
+require("./config/passport")(passport)
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(session({
+  secret: 'secret',
+  resave: true,
+  saveUnintialized : true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+app.use((req,res,next)=> {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
+})
+
+
 app.use(bodyParser.json())
 app.set('view engine', 'ejs');
 var port = 3000
 
-var PropertySchema = require('./lib/propertySchema.js');
-var Property = require('./lib/property.js')
+
+var Property = require('./lib/propertySchema.js')
 const User = require('./lib/userSchema.js')
 
 
@@ -27,13 +47,13 @@ db.once('open', function() {
 
 
 app.get('/', function (req, res) {
-  function renderLandingPage(all) {
-    console.log(all);
+  Property.find({}, function (err, properties) {
+    
     app.use(express.static(__dirname + '/images'));
     app.use(express.static(__dirname + '/views'));
-    res.render('landingPage', { all: all });
-  }
-const all = Property.all(renderLandingPage)
+    res.render('landingPage', { properties: properties, user: req.user });
+
+  });
 });
 
 app.get('/register', function (req, res) {
@@ -57,7 +77,7 @@ app.post('/register', function (req, res) {
         errors.push({msg : 'Password must be at least 6 characters.'})
     }
     if(errors.length > 0 ) {
-    res.render('register', {
+    res.render('register-property', {
         errors : errors,
         name : name,
         email : email,
@@ -69,7 +89,7 @@ app.post('/register', function (req, res) {
         console.log(user);   
         if(user) {
             errors.push({msg: 'Email already associated with an account.'});
-            render(res,errors,name,email,password,password2);
+            res.render('register',{errors,name,email,password,password2})
             
           } else {
             const newUser = new User({
@@ -87,7 +107,8 @@ app.post('/register', function (req, res) {
                     newUser.save()
                     .then((value)=>{
                         console.log(value)
-                    res.redirect('/users/login');
+                        req.flash('success_msg','Registration complete!')
+                    res.redirect('/login');
                     })
                     .catch(value=> console.log(value));
                       
@@ -102,7 +123,11 @@ app.post('/register', function (req, res) {
   })
 
   app.post('/login', function (req, res, next) {
-    
+    passport.authenticate('local', {
+      successRedirect : '/',
+      failureRedirect : '/login',
+      failureFlash : true,
+    })(req,res,next);
   })
 
   app.get('/register-property', function (req, res) {
@@ -111,28 +136,45 @@ app.post('/register', function (req, res) {
 
   app.post('/register-property', function (req, res) {
     const { name, address, description, ppn, contact, start_date, end_date } = req.body;
+    let errors = [];
+    if(!name || !address || !description || !ppn || !contact || !start_date || !end_date) {
+        errors.push({msg : "Please fill in all of the fields."})
+    }
+    if (errors.length > 0) {
+      res.render('register-property', {
+        errors: errors,
+        name: name,
+        address: address,
+        description: description,
+        ppn: ppn,
+        contact: contact,
+        start_date: start_date,
+        end_date: end_date
+      })
+    } else {
 
-    const newProperty = new PropertySchema({
-      name: name,
-      address: address,
-      description: description,
-      ppn: ppn,
-      contact: contact,
-      start_date: start_date,
-      end_date: end_date
-    });
+      const newProperty = new Property({
+        name: name,
+        address: address,
+        description: description,
+        ppn: ppn,
+        contact: contact,
+        start_date: start_date,
+        end_date: end_date
+      });
 
-    newProperty.save().then((value) => {
-      console.log(value);
-      res.redirect('/');
-    });
+      newProperty.save().then((value) => {
+        console.log(value);
+        res.redirect('/');
+      });
+    }
   })
 
   app.get('/logout', function (req, res) {
-    
+    req.logout()
+    req.flash('success_msg',"You've been logged out")
+    res.redirect('/')
   })
-
-
 
 
 app.listen(port);

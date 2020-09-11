@@ -1,6 +1,8 @@
+'use strict';
+const User = require('../lib/userSchema.js');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
-const User = require('./lib/userSchema');
+
 
 module.exports = function (passport) {
   passport.use(

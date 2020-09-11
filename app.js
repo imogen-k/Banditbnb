@@ -37,17 +37,18 @@ const all = Property.all(renderLandingPage)
 });
 
 app.get('/booking/:id', function(req, res) {
-  var id = req.params.id
-  console.log("here i am")
-  console.log(id)
   PropertySchema.findById(req.params.id, function(err, property){
-    console.log("property.....")
-    console.log(property.name)
     res.render('booking.ejs', {
       property : property
     });
  });
   
+})
+
+app.get('/booking/:id/confirmation', function(req, res) {
+  console.log('checking for id')
+  console.log(req.params.id)
+  res.render('bookingConfirmation.ejs')
 })
 
 

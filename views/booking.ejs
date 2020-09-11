@@ -36,20 +36,20 @@ div {
 <h3>Please select the dates you want to book for:</h3>
 <form action="/booking/<%= property.id %>" method="post"></form>
 <label for="start_date">Start Date:</label>
-<input type="date" name="start_date" placeholder="Start date">
+  <input type="date" name="start_date" placeholder="Start date">
 <br>
 <br>
 <label for="end_date">End Date:</label>
-<input type="date" name="end_date" placeholder="End date">
+  <input type="date" name="end_date" placeholder="End date">
 <br>
-<input type="submit" value="Check Availability" style="margin-top: 20;">
+  <input type="submit" value="Check Availability" style="margin-top: 20;">
 </form>
 <br>
 
 <!-- if available show this button -->
-<input type="submit" value="Book now!" style="margin-top: 50;">
+<form action="/booking/<%= property.id %>/confirmation" method="post"></form>
+  <input type="submit" value="Book now!" style="margin-top: 50;">
+</form>
 </div>
-
-
 
 </body>

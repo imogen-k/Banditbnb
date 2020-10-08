@@ -2,7 +2,14 @@
 
 ## MakersBnB specification
 
-We would like a web application that allows users to list spaces they have available, and to hire spaces for the night.
+A web application that allows users to list spaces they have available, and to hire spaces for the night.
+
+## Technology Stack
+
+* Node
+* Express
+* MongoDB
+* HTML & CSS
 
 Headline specifications
 ```
@@ -38,26 +45,6 @@ I dont want to be able to book spaces that are not available.
 
 As a User
 I want to be able to book spaces that have unconfirmed reservations.
-
-Nice-to-haves
-
-Users should receive an email whenever one of the following happens:
-They sign up
-They create a space
-They update a space
-Able to save a list of favourites
-A user requests to book their space
-They confirm a request
-They request to book a space
-Their request to book a space is confirmed
-Their request to book a space is denied
-Users should receive a text message to a provided number whenever one of the following happens:
-A user requests to book their space
-Their request to book a space is confirmed
-Their request to book a space is denied
-A ‘chat’ functionality once a space has been booked, allowing users whose space-booking request has been confirmed to chat with the user that owns that space
-Be able to search available spaces by tags.
-Basic payment implementation though Stripe.
 ```
 
 ## Database Setup

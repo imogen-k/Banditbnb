@@ -1,6 +1,8 @@
 # Banditbnb
 
-A web application that allows users to list spaces they have available, and to hire spaces for the night. 
+A web application that allows users to list spaces they have available, and to hire spaces for the night.
+
+[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
 
 ## Technology Stack
 
